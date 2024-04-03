@@ -1,0 +1,117 @@
+/*comando para acessar banco no prompt*/
+mysql -h localhost -u root -p
+
+/*Visualizar os bancos de dados.*/
+show databases;
+
+/*Criar o Banco de Dados liberdade.*/
+create database liberdade;
+
+/*Visualizar os bancos de dados.*/
+show databases;
+
+/*Criar o Banco de Dados liberdade se não existir.*/
+create database IF NOT EXISTS liberdade;
+
+/*Definir qual o Banco de Dados iremos usar.*/
+use liberdade;
+
+/*Visualizar as tabelas no Banco de Dados.*/
+show tables;
+
+/*Visualizar o charset.*/
+show variables like "character_set_databases";
+
+/*Visualizar o collation.*/
+show variables like "collation_database";
+
+/*Alterar o collation e charset do Banco de dados.*/
+alter database liberdade DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+/*Verificar se existe a tabela no banco de dados.*/
+drop table IF EXISTS cliente;
+
+/*Criar a tabela cliente.*/
+create table cliente(
+	cod_cliente smallint,
+	nome_cliente varchar(150),
+	endereco_cliente varchar(150),
+	cidade_cliente varchar(50),
+	CEP varchar(10),
+	UF varchar(2),
+	CNPJ varchar(18),
+	IE varchar(15)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Visualizar a estrutura da tabela.*/
+desc cliente;
+
+/*Inserir chave primaria na tabela cliente.*/
+/*Lock tables read - bloqueia leitura
+Lock tables write - bloqueia gravação*/
+LOCK TABLES cliente WRITE;
+ALTER TABLE CLIENTE
+ADD PRIMARY KEY(cod_cliente);
+UNLOCK TABLES;
+
+/*Inserir dados na tabela cliente.
+Sem declarar as colunas*/
+INSERT INTO cliente VALUES('1', 'Microsoft', 'Av Paulista', 'São Paulo', '17500000', 'SP','33885990000105', '142270790110'),('2', 'IBM','Av Paulista', 'São Paulo', '17500000','SP','33885990000105','144070090440'),('3', 'DELL','Av Paulista', 'São Paulo', '17500000', 'SP','55888890000220', '164090090333');
+
+/*Visualizar os dados.*/
+select * from cliente;
+
+/*Criar uma tabela de Vendedor.*/
+CREATE TABLE vendedor(
+	cod_vendedor smallint,
+	nome_vendedor varchar(150),
+	salario_fixo decimal(9,2),
+	faixa_comissao char(1),
+	PRIMARY KEY(cod_vendedor)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*Inserir dados na tabela vendedor.*/
+INSERT INTO vendedor VALUES
+('1', 'Marcos', '3000', 'A'),
+('2', 'Ana', '3000', 'A'),
+('3', 'João', '2800', 'B');
+
+/*Criar uma tabela de Produtos.*/
+CREATE TABLE produto(
+	cod_produto smallint NOT NULL unique,
+	unidade char(3),
+	descricao_produto varchar(200),
+	valor_unitario decimal(9,2)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Inserir os dados na tabela produto*/
+INSERT INTO produto VALUE
+('1', 'Kg', 'Silica', '60'),
+('2', 'Kg', 'Cobre', '70'),
+('3', 'Kg', 'Estanho', '360');
+
+/*Criar a tabela Pedido.*/
+CREATE TABLE pedido(
+	num_pedido int(10) NOT NULL unique,
+	prazo_entrega smallint NOT NULL,
+	cod_cliente smallint NOT NULL,
+	cod_vendedor smallint NOT NULL,
+	CONSTRAINT fk_pedido_cliente
+	FOREIGN KEY(cod_cliente) REFERENCES cliente(cod_cliente) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT fk_pedido_vendedor
+	FOREIGN KEY (cod_vendedor) REFERENCES vendedor(cod_vendedor) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
+
+
