@@ -23,3 +23,47 @@ SELECT Sigla, Numero, NAlunos FROM Turma_Old;
 DROP TABLE Turma_Old;
 
 
+
+//Tabelas apos alterações alteradas.
+CREATE TABLE Aluno (
+    RA INT PRIMARY KEY,    
+    Nome VARCHAR(100),
+    Idade INT,
+    DataNasc DATE,
+    Cidade VARCHAR(100) 
+);
+
+CREATE TABLE Professor (
+    NFunc INT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Idade INT,
+    Titulacao VARCHAR(50)
+);
+
+CREATE TABLE Disciplina (
+    Sigla VARCHAR(10) PRIMARY KEY,
+    Nome VARCHAR(100),
+    NCred INT,
+    Professor_NFunc INT,
+    Livro VARCHAR(100),
+    FOREIGN KEY (Professor_NFunc) REFERENCES Professor(NFunc)
+);
+
+CREATE TABLE Turma (
+    Sigla VARCHAR(10),
+    NAlunos INT CHECK (NAlunos BETWEEN 1 AND 40),
+    PRIMARY KEY (Sigla),
+    FOREIGN KEY (Sigla) REFERENCES Disciplina(Sigla)
+);
+
+CREATE TABLE Matricula (
+    Sigla VARCHAR(10),
+    Aluno_RA INT,
+    Ano INT,
+    Mencao CHAR(2) CHECK (Mencao IN ('I', 'R', 'B', 'MB')),
+    PRIMARY KEY (Sigla, Aluno_RA),
+    FOREIGN KEY (Sigla) REFERENCES Turma(Sigla),
+    FOREIGN KEY (Aluno_RA) REFERENCES Aluno(RA)
+);
+
+
