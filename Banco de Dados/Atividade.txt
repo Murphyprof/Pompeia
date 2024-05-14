@@ -1,0 +1,45 @@
+create database escola;
+
+use escola;
+
+CREATE TABLE Aluno (
+    RA INT PRIMARY KEY,    
+    Nome VARCHAR(100),
+    Idade INT,
+    DataNasc DATE
+);
+
+CREATE TABLE Professor (
+    NFunc INT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Idade INT,
+    Titulacao VARCHAR(50)
+);
+
+CREATE TABLE Disciplina (
+    Sigla VARCHAR(10) PRIMARY KEY,
+    Nome VARCHAR(100),
+    NCred INT,
+    Professor_NFunc INT,
+    Livro VARCHAR(100),
+    FOREIGN KEY (Professor_NFunc) REFERENCES Professor(NFunc)
+);
+
+CREATE TABLE Turma (
+    Sigla VARCHAR(10),
+    Numero INT,
+    NAlunos INT CHECK (NAlunos BETWEEN 1 AND 40),
+    PRIMARY KEY (Sigla, Numero),
+    FOREIGN KEY (Sigla) REFERENCES Disciplina(Sigla)
+);
+
+CREATE TABLE Matricula (
+    Sigla VARCHAR(10),
+    Numero INT,
+    Aluno_RA INT,
+    Ano INT,
+    Nota DECIMAL(5,2) CHECK (Nota BETWEEN 0.00 AND 10.00),
+    PRIMARY KEY (Sigla, Numero, Aluno_RA),
+    FOREIGN KEY (Sigla, Numero) REFERENCES Turma(Sigla, Numero),
+    FOREIGN KEY (Aluno_RA) REFERENCES Aluno(RA)
+);
