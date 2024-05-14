@@ -43,3 +43,50 @@ CREATE TABLE Matricula (
     FOREIGN KEY (Sigla, Numero) REFERENCES Turma(Sigla, Numero),
     FOREIGN KEY (Aluno_RA) REFERENCES Aluno(RA)
 );
+
+
+//Atividade Aula de alterações das tabelas.
+ALTER TABLE Aluno
+  ADD Cidade VARCHAR(100);
+
+ALTER TABLE Turma
+  DROP COLUMN Numero;
+
+SELECT CONSTRAINT_NAME 
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+WHERE TABLE_NAME = 'Turma' AND CONSTRAINT_TYPE = 'CHECK';
+
+ALTER TABLE Turma
+DROP CHECK turma_chk_1;
+
+ALTER TABLE Matricula
+  DROP COLUMN Nota;
+
+ALTER TABLE Matricula
+  ADD COLUMN Mencao CHAR(2) CHECK (Mencao IN ('I', 'R', 'B', 'MB'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
