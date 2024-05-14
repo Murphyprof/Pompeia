@@ -1,0 +1,25 @@
+SELECT CONSTRAINT_NAME 
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+WHERE TABLE_NAME = 'Turma' AND CONSTRAINT_TYPE = 'CHECK';
+
+ALTER TABLE Turma
+DROP CHECK nome_check;
+
+//outra opção
+RENAME TABLE Turma TO Turma_Old;
+
+CREATE TABLE Turma (
+    Sigla VARCHAR(10),
+    Numero INT,
+    NAlunos INT,
+    PRIMARY KEY (Sigla, Numero),
+    FOREIGN KEY (Sigla) REFERENCES Disciplina(Sigla)
+);
+
+INSERT INTO Turma (Sigla, Numero, NAlunos)
+SELECT Sigla, Numero, NAlunos FROM Turma_Old;
+
+
+DROP TABLE Turma_Old;
+
+
