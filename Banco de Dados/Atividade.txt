@@ -66,9 +66,63 @@ ALTER TABLE Matricula
   ADD COLUMN Mencao CHAR(2) CHECK (Mencao IN ('I', 'R', 'B', 'MB'));
 
 
+//Inserir 5 registros em cada tabela.
+//tabela aluno
+INSERT INTO Aluno (RA, Nome, Idade, DataNasc, Cidade) VALUES
+(1, 'Ana Silva', 20, '2004-03-15', 'São Paulo'),
+(2, 'Bruno Lima', 22, '2002-07-22', 'Rio de Janeiro'),
+(3, 'Carla Souza', 19, '2005-01-12', 'Belo Horizonte'),
+(4, 'Diego Oliveira', 21, '2003-06-30', 'Curitiba'),
+(5, 'Elena Costa', 23, '2001-09-25', 'Salvador');
 
+INSERT INTO Professor (NFunc, Nome, Idade, Titulacao) VALUES
+(101, 'Carlos Mendes', 45, 'Doutor'),
+(102, 'Fernanda Pereira', 38, 'Mestre'),
+(103, 'Roberto Santos', 50, 'Doutor'),
+(104, 'Julia Almeida', 32, 'Especialista'),
+(105, 'Mariana Rocha', 40, 'Mestre');
 
+INSERT INTO Disciplina (Sigla, Nome, NCred, Professor_NFunc, Livro) VALUES
+('MAT101', 'Matemática Básica', 4, 101, 'Livro de Matemática A'),
+('FIS102', 'Física I', 3, 102, 'Livro de Física B'),
+('QUI103', 'Química Geral', 3, 103, 'Livro de Química C'),
+('BIO104', 'Biologia', 4, 104, 'Livro de Biologia D'),
+('HIS105', 'História', 2, 105, 'Livro de História E');
 
+INSERT INTO Turma (Sigla, NAlunos) VALUES
+('MAT101', 30),
+('FIS102', 25),
+('QUI103', 35),
+('BIO104', 20),
+('HIS105', 40);
+
+INSERT INTO Matricula (Sigla, Aluno_RA, Ano, Mencao) VALUES
+('MAT101', 1, 2023, 'MB'),
+('FIS102', 2, 2023, 'B'),
+('QUI103', 3, 2023, 'R'),
+('BIO104', 4, 2023, 'I'),
+('HIS105', 5, 2023, 'MB');
+
+//Update
+UPDATE Aluno
+SET cidade = 'Feira de Santana'
+where nome = 'Elena Costa';
+
+UPDATE Professor
+SET titulacao = 'Mestre'
+where nome = 'Julia Almeida';
+
+UPDATE Turma
+SET NAlunos = 40
+WHERE Sigla = 'QUI103';
+
+UPDATE Turma
+SET NAlunos = 35
+where sigla = 'FISI102';
+
+UPDATE MATRICULA
+SET mencao = 'B'
+where sigla = 'BIO104';
 
 
 
