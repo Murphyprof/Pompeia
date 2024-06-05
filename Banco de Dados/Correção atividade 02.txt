@@ -1,0 +1,93 @@
+Atividade:
+Crie as tabelas curso, coordenador, e alunos com os campos e relações apropriadas:
+CREATE TABLE coordenador (
+    cod_coord INTEGER NOT NULL PRIMARY KEY,
+    nome_coord VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE curso (
+    cod_curso INTEGER NOT NULL PRIMARY KEY,
+    tot_cred INTEGER NOT NULL,
+    nome_curso VARCHAR(60) NOT NULL,
+    cod_coord INTEGER NOT NULL,
+    FOREIGN KEY (cod_coord) REFERENCES coordenador(cod_coord)
+);
+
+CREATE TABLE alunos (
+    mat_aluno INTEGER NOT NULL PRIMARY KEY,
+    cod_curso INTEGER NOT NULL,
+    dat_nasc DATE NOT NULL,
+    tot_cred INTEGER NOT NULL,
+    mgp DOUBLE NOT NULL,
+    nome_aluno VARCHAR(60) NOT NULL,
+    email_aluno VARCHAR(30),
+    FOREIGN KEY (cod_curso) REFERENCES curso(cod_curso)
+);
+
+Insira dados nas tabelas criadas:
+INSERT INTO coordenador (cod_coord, nome_coord) VALUES
+(1, 'João Silva'),
+(2, 'Maria Oliveira');
+
+INSERT INTO curso (cod_curso, tot_cred, nome_curso, cod_coord) VALUES
+(1, 120, 'Engenharia de Software', 1),
+(2, 100, 'Administração', 2);
+
+INSERT INTO alunos (mat_aluno, cod_curso, dat_nasc, tot_cred, mgp, nome_aluno, email_aluno) VALUES
+(101, 1, '2000-05-15', 30, 8.5, 'Ana Souza', 'ana.souza@email.com'),
+(102, 2, '1998-08-22', 50, 7.0, 'Carlos Lima', 'carlos.lima@email.com'),
+(103, 1, '1999-11-30', 45, 9.0, 'Beatriz Gonçalves', 'beatriz.goncalves@email.com');
+
+Atualize o nome de um coordenador:
+UPDATE coordenador SET nome_coord = 'João Pedro Silva' WHERE cod_coord = 1;
+
+Delete um aluno da tabela:
+DELETE FROM alunos WHERE mat_aluno = 102;
+
+Adicione uma nova coluna na tabela alunos para armazenar o telefone:
+ALTER TABLE alunos ADD COLUMN telefone VARCHAR(15);
+
+Selecione todos os alunos de um curso específico:
+SELECT * FROM alunos WHERE cod_curso = 1;
+
+Agrupe alunos por curso e calcule a média do MGP:
+SELECT cod_curso, AVG(mgp) AS media_mgp
+FROM alunos
+GROUP BY cod_curso;
+
+Ordene os alunos pelo nome:
+SELECT * FROM alunos ORDER BY nome_aluno;
+
+Busque alunos cujo nome contém "Souza":
+SELECT * FROM alunos WHERE nome_aluno LIKE '%Souza%';
+
+Busque alunos cujo nome não contém "Lima":
+SELECT * FROM alunos WHERE nome_aluno NOT LIKE '%Lima%';
+
+Selecione alunos nascidos entre 1999 e 2000:
+SELECT * FROM alunos WHERE dat_nasc BETWEEN '1999-01-01' AND '2000-12-31';
+
+Encontre o menor e maior MGP dos alunos:
+SELECT MIN(mgp) AS menor_mgp, MAX(mgp) AS maior_mgp FROM alunos;
+
+Calcule a soma dos créditos totais dos alunos:
+SELECT SUM(tot_cred) AS total_creditos FROM alunos;
+
+Conte o número de alunos:
+SELECT COUNT(*) AS numero_alunos FROM alunos;
+
+Selecione o nome dos alunos que estão em cursos coordenados por 'Maria Oliveira':
+SELECT nome_aluno
+FROM alunos
+WHERE cod_curso IN (
+    SELECT cod_curso
+    FROM curso
+    WHERE cod_coord = (SELECT cod_coord FROM coordenador WHERE nome_coord = 'Maria Oliveira')
+);
+
+Com Join
+SELECT a.nom_alu
+FROM alunos a
+JOIN curso c ON a.cod_curso = c.cod_curso
+JOIN coordenador co ON c.cod_coord = co.cod_coord
+WHERE co.nome = 'Maria Oliveira';
