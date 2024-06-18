@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferências Pessoais</title>
+</head>
+<body>
+    <form action="processarform.php" method="get">
+        <h1>Equipes de F1?</h1>
+            <label for="Ferrari">Ferrari</label>
+            <input type="radio" value="1" name="opcao"><br>
+            <label for="RBR">RBR</label>
+            <input type="radio" value="2" name="opcao"><br>
+            <label for="Mercedes">Mercedes</label>
+            <input type="radio" value="3" name="opcao"><br>
+            <label for="Mclaren">Mclaren</label>
+            <input type="radio" value="4" name="opcao"><br>
+            <label for="Aston Martin">Aston Martin</label>
+            <input type="radio" value="5" name="opcao"><br>
+
+            <h2>Melhor Banda de Rock?</h2>
+            <input type="checkbox" value="Beatles" name="escolha[]">Beatles <br>
+            <input type="checkbox" value="Led-Zeppelin" name="escolha[]">Led-Zeppelin <br>
+            <input type="checkbox" value="Pink Floyd" name="escolha[]">Pink Floyd <br>
+            <input type="checkbox" value="Iron Maiden" name="escolha[]">Iron Maiden <br>
+            <input type="checkbox" value="Queen" name="escolha[]">Queen <br>
+
+            <h2>Escolha um Desenho:</h2>
+            <select name="desenho" id="desenho">
+                <option value="vazio" disabled selected></option>
+                <option value="Simpsons">Simpsons</option>
+                <option value="South Park">South Park</option>
+                <option value="Scooby-Doo">Scooby-Doo</option>
+                <option value="Caverna do Dragão">Caverna do Dragão</option>
+                <option value="Pica Pau">Pica Pau</option>
+            </select><br><br>
+            <input type="submit" value="Enviar!!!">
+    </form>
+
+</body>
+</html>
