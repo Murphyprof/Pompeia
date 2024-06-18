@@ -23,23 +23,23 @@
 
 
 //Melhorando o código acima:
-if(isset(($_GET['opcao']), ($_GET['escolha']),($_GET['desenho']))){
-    $opcao = $_GET['opcao'];
-    $escolha = $_GET['escolha'];
-    $bandas= $_GET['desenho'];
+// if(isset(($_GET['opcao']), ($_GET['escolha']),($_GET['desenho']))){
+//     $opcao = $_GET['opcao'];
+//     $escolha = $_GET['escolha'];
+//     $bandas= $_GET['desenho'];
 
-    echo "Sua escolha para equipes de F1 foi: " . $opcao;
-    echo "<br><br>";
+//     echo "Sua escolha para equipes de F1 foi: " . $opcao;
+//     echo "<br><br>";
 
-    echo "Suas outras escolhas foram : <br>";
-    for($i = 0; $i < count($escolha); $i++) {
-        echo "Escolha " . $i . ":" . $escolha[$i] . "<br>";
-    }
-    echo "<br><br>";
-    echo "O desenho escolhido é: <mark>" . $desenho;
-}else{
-    echo "Faltou selecionar alguma das opções. <br>";
-}
+//     echo "Suas outras escolhas foram : <br>";
+//     for($i = 0; $i < count($escolha); $i++) {
+//         echo "Escolha " . $i . ":" . $escolha[$i] . "<br>";
+//     }
+//     echo "<br><br>";
+//     echo "O desenho escolhido é: <mark>" . $desenho;
+// }else{
+//     echo "Faltou selecionar alguma das opções. <br>";
+// }
 
 //Orientado a Objeto
 class Escolhas{
